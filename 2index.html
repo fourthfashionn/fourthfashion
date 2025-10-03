@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fourth Fashion - Ultra Premium</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@3.0.0-beta.6/dist/aos.css" />
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/gsap.min.js"></script>
+
+    <style>
+        * { margin:0; padding:0; box-sizing:border-box; }
+        body { font-family: 'Montserrat', sans-serif; background:#f5f5f5; color:#333; overflow-x:hidden; }
+        a { text-decoration:none; color:inherit; }
+        img { display:block; max-width:100%; height:auto; }
+
+        header { background:#111; color:#fff; padding:20px 50px; display:flex; justify-content:space-between; align-items:center; position:fixed; width:100%; top:0; z-index:1000; }
+        header h1 { font-size:28px; letter-spacing:1px; cursor:pointer; }
+        nav a { margin-left:30px; font-weight:500; transition: color 0.3s; }
+        nav a:hover { color:#f39c12; }
+
+        /* H E R O   S E C T I O N   V I D E O   S T Y L E S */
+        .hero { 
+            height:100vh; 
+            display:flex; 
+            justify-content:center; 
+            align-items:center; 
+            text-align:center; 
+            flex-direction:column; 
+            color:#fff; 
+            position:relative; 
+            overflow: hidden; 
+        }
+        .hero video {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            z-index: 1; 
+            transform: translate(-50%, -50%);
+        }
+        /* কন্টেন্টের পঠনযোগ্যতা বাড়াতে ওভারলে যোগ করা */
+        .hero::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.4); 
+            z-index: 2;
+        }
+        /* হিরো কন্টেন্টকে ভিডিও এবং ওভারলের উপরে রাখা */
+        .hero h2, .hero p, .hero .cta-btn {
+            z-index: 3;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.7); 
+        }
+        
+        .hero h2 { font-size:65px; margin-bottom:20px; }
+        .hero p { font-size:24px; }
+        .hero .cta-btn { margin-top:30px; padding:15px 35px; background:#f39c12; color:#fff; border:none; border-radius:5px; font-size:18px; cursor:pointer; transition:background 0.3s; }
+        .hero .cta-btn:hover { background:#e67e22; }
+
+        section h2 { font-size:40px; margin-bottom:40px; text-align:center; }
+
+        .products { padding:120px 50px 80px; background:#fff; }
+        .swiper { padding-bottom:50px; }
+        .swiper-slide { background:#f9f9f9; border-radius:15px; overflow:hidden; box-shadow:0 12px 30px rgba(0,0,0,0.12); transition:transform 0.3s; }
+        .swiper-slide:hover { transform:translateY(-10px); }
+        
+        /* ⚠️ ইমেজ সাইজ ফিক্স - 800x800 ছবির জন্য CSS */
+        .swiper-slide img { 
+            width:100%; 
+            height: auto; 
+            aspect-ratio: 1 / 1; 
+            object-fit: cover; 
+        }
+        /* ⚠️ ফিক্স সমাপ্ত */
+        
+        .swiper-slide h3 { padding:15px; font-size:22px; }
+        .swiper-slide p { padding:0 15px 15px; color:#666; font-size:16px; line-height:1.5; }
+
+        .about { padding:100px 50px; background:#222; color:#fff; text-align:center; }
+        .about p { max-width:900px; margin:auto; line-height:1.8; font-size:18px; }
+
+        .gallery { padding:100px 50px; background:#f5f5f5; display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:30px; }
+        .gallery img { border-radius:10px; transition:transform 0.3s, box-shadow 0.3s; cursor:pointer; }
+        .gallery img:hover { transform:scale(1.05); box-shadow:0 12px 25px rgba(0,0,0,0.2); }
+
+        /* Contact Form */
+        .contact { padding:100px 50px; background:#fff; }
+        .contact form { max-width:600px; margin:auto; display:flex; flex-direction:column; gap:20px; }
+        .contact input, .contact textarea { padding:15px; border-radius:5px; border:1px solid #ccc; font-size:16px; transition:border-color 0.3s; }
+        .contact input:focus, .contact textarea:focus { border-color:#f39c12; outline:none; }
+        .contact button { padding:15px; border:none; background:#111; color:#fff; font-size:18px; cursor:pointer; border-radius:5px; transition:background 0.3s; }
+        .contact button:hover { background:#f39c12; }
+
+        /* Info Section Card Style */
+        .info { padding:100px 50px; background:#f9f9f9; }
+        .info h2 { margin-bottom:50px; }
+        .info-container { display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:30px; max-width:1200px; margin:auto; }
+        .info-card { background:#fff; padding:25px; border-radius:15px; box-shadow:0 10px 25px rgba(0,0,0,0.1); transition:transform 0.3s, box-shadow 0.3s; }
+        .info-card:hover { transform:translateY(-5px); box-shadow:0 15px 35px rgba(0,0,0,0.15); }
+        .info-card h3 { margin-bottom:15px; color:#111; }
+        .info-card p { color:#333; line-height:1.6; }
+
+        footer { background:#111; color:#fff; text-align:center; padding:30px 50px; }
+        footer a { color:#fff; margin:0 10px; text-decoration:none; font-weight:500; transition:color 0.3s; }
+        footer a:hover { color:#f39c12; }
+
+        @media(max-width:768px){
+            .hero h2 { font-size:45px; }
+            .hero p { font-size:18px; }
+            header { flex-direction:column; gap:15px; }
+            nav a { margin-left:0; margin-right:20px; }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Fourth Fashion</h1>
+    <nav>
+        <a href="#products">Products</a>
+        <a href="#gallery">Gallery</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+        <a href="#info">Info</a>
+    </nav>
+</header>
+
+<section class="hero">
+    <video autoplay loop muted playsinline poster="Hero Section.jpg">
+        <source src="hero-video.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+    
+    <h2>Luxury, Style, Comfort</h2>
+    <p>Experience premium fashion in every stitch</p>
+    <button class="cta-btn">Shop Now</button>
+</section>
+
+<section id="products" class="products">
+    <h2 data-aos="fade-up">Our Collection</h2>
+    <div class="swiper mySwiper" data-aos="fade-up" data-aos-delay="200">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide">
+                <img src="product1.jpg" alt="Fourth Elegant"> 
+                <h3>Fourth Elegant</h3>
+                <p>High quality fabric with stylish design.</p>
+            </div>
+            <div class="swiper-slide">
+                <img src="product2.jpg" alt="Fourth Signature Tee">
+                <h3>Fourth Signature Tee</h3>
+                <p>Minimalist luxury for everyday wear.</p>
+            </div>
+            <div class="swiper-slide">
+                <img src="product3.jpg" alt="Fourth X Mark-2">
+                <h3>Fourth X Mark-2</h3>
+                <p>Comfort meets elegance in one piece.</p>
+            </div>
+            <div class="swiper-slide">
+                <img src="product4.jpg" alt="Savage Collection">
+                <h3>Savage Collection</h3>
+                <p>New luxury design for summer.</p>
+            </div>
+        </div>
+        <div class="swiper-button-next"></div>
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-pagination"></div>
+    </div>
+</section>
+
+<section id="gallery" class="gallery" data-aos="fade-up">
+    <img src="gallery1.jpg" alt="Gallery Image 1">
+    <img src="gallery2.jpg" alt="Gallery Image 2">
+    <img src="gallery3.jpg" alt="Gallery Image 3">
+    <img src="gallery4.jpg" alt="Gallery Image 4">
+</section>
+
+<section id="about" class="about" data-aos="fade-up">
+    <h2>About Fourth Fashion</h2>
+    <p>Fourth Fashion is dedicated to creating premium, comfortable fashion pieces for men and women. Our designs focus on quality, style, and a luxurious feel for your everyday wardrobe. Each piece is crafted with attention to detail, ensuring a sophisticated aesthetic and superior comfort.</p>
+</section>
+
+<section id="contact" class="contact" data-aos="fade-up">
+    <h2>Contact Us</h2>
+    
+    <form id="contact-form">
+        <input type="text" name="name" placeholder="Your Name" required>
+        <input type="email" name="email" placeholder="Your Email" required>
+        <input type="text" name="number" placeholder="Your Phone Number" required>
+        <textarea name="message" placeholder="Your Message" rows="6" required></textarea>
+        <button type="submit">Send Message</button>
+    </form>
+</section>
+
+<section id="info" class="info" data-aos="fade-up">
+    <h2>Information</h2>
+    <div class="info-container">
+        <div class="info-card">
+            <h3>Size Chart</h3>
+            <p>Check our detailed size chart to find your perfect fit. Sizes may vary slightly depending on the style.</p>
+        </div>
+        <div class="info-card">
+            <h3>Fabric Care</h3>
+            <p>Machine wash cold, gentle cycle. Do not bleach. Tumble dry low or hang dry. Iron on low heat if needed.</p>
+        </div>
+        <div class="info-card">
+            <h3>Delivery</h3>
+            <p>Orders are processed within 2-3 business days. Delivery takes 3-7 business days depending on your location.</p>
+        </div>
+        <div class="info-card">
+            <h3>Return & Exchange</h3>
+            <p>We accept returns and exchanges within 7 days of delivery. Products must be unused and in original packaging. Contact us to initiate the process.</p>
+        </div>
+        <div class="info-card">
+            <h3>Billing</h3>
+            <p>We accept all major credit/debit cards, mobile banking, and cash on delivery. All payments are secure and encrypted;</p>
+        </div>
+        <div class="info-card">
+            <h3>Terms & Conditions</h3>
+            <p>By using our website and purchasing products, you agree to our terms and conditions. Please read carefully before placing an order.</p>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <p>&copy; 2025 Fourth Fashion. All rights reserved.</p>
+    <div>
+        <a href="https://www.facebook.com/share/1BRJAj3vcL/" target="_blank">Facebook</a>
+        <a href="https://www.instagram.com/fourth_fashion?igsh=MWc2cmVxYmNzN3U3" target="_blank">Instagram</a>
+        <a href="https://www.tiktok.com/@fourthfashion_?_t=ZS-90EBxQVQnbd&_r=1" target="_blank">TikTok</a>
+    </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/aos@3.0.0-beta.6/dist/aos.js"></script>
+<script>
+    AOS.init({ duration:1200, once:true });
+
+    const swiper = new Swiper('.mySwiper', {
+        slidesPerView:1,
+        spaceBetween:30,
+        loop:true,
+        pagination:{ el:'.swiper-pagination', clickable:true },
+        navigation:{ nextEl:'.swiper-button-next', prevEl:'.swiper-button-prev' },
+        breakpoints:{ 768:{ slidesPerView:2 }, 1024:{ slidesPerView:3 } }
+    });
+
+    // GSAP hero button animation
+    gsap.from('.cta-btn', { y:50, opacity:0, duration:1, delay:1.5, ease:'power3.out' });
+
+    // কন্টাক্ট ফর্ম সাবমিট - এখন কোনো গুগল ফর্মে ডেটা পাঠাবে না, বরং শুধু একটি বার্তা দেখাবে
+    const form = document.getElementById('contact-form');
+    form.addEventListener('submit', e => {
+        e.preventDefault();
+        
+        // ফর্ম সাবমিট হলে শুধু একটি সাধারণ মেসেজ দেখাবে 
+        alert('ফর্ম সফলভাবে সাবমিট হয়েছে! ডেটা সেভ করার জন্য আপনাকে পরে সার্ভার সেটআপ করতে হবে।');
+        form.reset();
+    });
+</script>
+
+</body>
+</html>
